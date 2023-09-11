@@ -12,12 +12,12 @@ interface PostProps {
 export const Post = ({ activePostId, changeActivePostId }: PostProps) => {
   const { data: post, isLoading, error } = useGetPost(activePostId);
   const {
-    updatePost,
+    mutation: updatePost,
     isLoading: isLoadingUpdatePost,
     error: errorUpdatePost,
   } = useUpdatePost(activePostId);
   const {
-    deletePost,
+    mutation: deletePost,
     isLoading: isLoadingDeletePost,
     error: errorDeletePost,
   } = useDeletePost();

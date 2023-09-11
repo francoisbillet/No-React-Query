@@ -10,7 +10,7 @@ interface PostProps {
 export function Posts({ changeActivePostId }: PostProps) {
   const { data: posts, isLoading, error } = useGetPosts();
   const {
-    createPost,
+    mutation: createPost,
     isLoading: isLoadingCreatePost,
     error: errorCreatePost,
   } = useCreatePost();
