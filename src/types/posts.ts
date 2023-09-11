@@ -3,3 +3,5 @@ export interface Post {
   title: string;
   content: string;
 }
+
+export type PostRequest = Omit<Post, "id">;

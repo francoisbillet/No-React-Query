@@ -1,5 +1,7 @@
-import { Post } from "../types/posts";
+import { Post, PostRequest } from "../types/posts";
 import { useGetPosts } from "../hooks/useGetPosts";
+import { PostForm } from "./PostForm";
+import { useCreatePost } from "../hooks/useCreatePost";
 
 interface PostProps {
   changeActivePostId: (postId: number) => void;
@@ -7,6 +9,11 @@ interface PostProps {
 
 export function Posts({ changeActivePostId }: PostProps) {
   const { data: posts, isLoading, error } = useGetPosts();
+  const {
+    createPost,
+    isLoading: isLoadingCreatePost,
+    error: errorCreatePost,
+  } = useCreatePost();
 
   function displayPosts() {
     if (isLoading) {
@@ -32,10 +39,21 @@ export function Posts({ changeActivePostId }: PostProps) {
     );
   }
 
+  function onSubmit(values: PostRequest) {
+    createPost(values);
+  }
+
   return (
     <>
       <h2 className="font-bold">Posts </h2>
       {displayPosts()}
+      <hr className="border-gray-600 my-1" />
+      <div>
+        <h2 className="font-bold">Add Post</h2>
+        <PostForm onSubmit={onSubmit} />
+        {isLoadingCreatePost && <div>Loading...</div>}
+        {errorCreatePost && <div>Error creating post: {errorCreatePost}</div>}
+      </div>
     </>
   );
 }
