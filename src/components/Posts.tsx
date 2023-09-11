@@ -1,7 +1,11 @@
 import { Post } from "../types/posts";
 import { useGetPosts } from "../hooks/useGetPosts";
 
-export function Posts() {
+interface PostProps {
+  changeActivePostId: (postId: number) => void;
+}
+
+export function Posts({ changeActivePostId }: PostProps) {
   const { posts, isLoading, error } = useGetPosts();
 
   function displayPosts() {
@@ -14,11 +18,24 @@ export function Posts() {
     return (
       <ul>
         {posts?.map((post: Post) => (
-          <li key={post.id}>{post.title}</li>
+          <li key={post.id}>
+            <a
+              href="#"
+              onClick={() => changeActivePostId(post.id)}
+              className="underline text-blue-500"
+            >
+              {post.title}
+            </a>
+          </li>
         ))}
       </ul>
     );
   }
 
-  return displayPosts();
+  return (
+    <>
+      <h2 className="font-bold">Posts </h2>
+      {displayPosts()}
+    </>
+  );
 }
