@@ -6,7 +6,7 @@ interface PostProps {
 }
 
 export function Posts({ changeActivePostId }: PostProps) {
-  const { posts, isLoading, error } = useGetPosts();
+  const { data: posts, isLoading, error } = useGetPosts();
 
   function displayPosts() {
     if (isLoading) {

@@ -5,7 +5,7 @@ interface PostProps {
 }
 
 export const Post = ({ activePostId }: PostProps) => {
-  const { post, isLoading, error } = useGetPost(activePostId);
+  const { data: post, isLoading, error } = useGetPost(activePostId);
 
   if (isLoading) {
     return <div>Loading...</div>;
