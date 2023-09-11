@@ -21,7 +21,10 @@ function App() {
         {!activePostId ? (
           <Posts changeActivePostId={setActivePostId} />
         ) : (
-          <Post activePostId={activePostId} />
+          <Post
+            activePostId={activePostId}
+            changeActivePostId={setActivePostId}
+          />
         )}
       </main>
     </div>
