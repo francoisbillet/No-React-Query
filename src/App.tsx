@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { Posts } from "./components/Posts";
 import { Post } from "./components/Post";
+import { useGetPosts } from "./hooks/useGetPosts";
 
 function App() {
   const [activePostId, setActivePostId] = useState<number | null>(null);
@@ -15,6 +16,7 @@ function App() {
         >
           All posts
         </a>
+        <Stats />
       </div>
       <hr className="border-gray-600 my-1" />
       <main>
@@ -28,6 +30,24 @@ function App() {
         )}
       </main>
     </div>
+  );
+}
+
+function Stats() {
+  const { data: posts, isLoading, error } = useGetPosts();
+
+  function displayTotalPosts() {
+    if (isLoading) {
+      return "...";
+    }
+    return posts?.length;
+  }
+
+  return (
+    <>
+      <p>Total Posts : {displayTotalPosts()}</p>
+      {error && <div>Error: {error}</div>}
+    </>
   );
 }
 
